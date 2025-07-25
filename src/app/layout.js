@@ -21,11 +21,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <ProtectedRoute>
-          <body>{children}</body>
-        </ProtectedRoute>
-      </AuthProvider>
+      <body>
+        <AuthProvider>
+          <ProtectedRoute>{children}</ProtectedRoute>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

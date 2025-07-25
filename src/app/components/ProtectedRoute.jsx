@@ -4,15 +4,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
+  const publicRoutes = ["/", "/login", "/register"];
+
   useEffect(() => {
-    if (!user && !["/login", "/register", "/"].includes(pathname)) {
-      router.push("/");
+    if (!loading && !user && !publicRoutes.includes(pathname)) {
+      router.push("/login");
     }
-  }, [user, pathname]);
+  }, [user, pathname, loading]);
+
+  if (loading) return null;
 
   return children;
 }

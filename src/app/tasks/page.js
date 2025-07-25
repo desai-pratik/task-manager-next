@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Plus, Trash2 } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState([]);
+const { logout } = useAuth();
 
   useEffect(() => {
     const localTasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -23,15 +25,25 @@ export default function TaskList() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800">📋 Task Manager</h1>
+       <div className="flex justify-between items-center mb-8">
+      <h1 className="text-4xl font-bold text-gray-800">📋 Task Manager</h1>
+
+      <div className="flex gap-4 items-center">
         <Link
           href="/tasks/add"
           className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
         >
           <Plus size={18} /> Add Task
         </Link>
+
+        <button
+          onClick={logout}
+          className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-red-600 transition duration-300"
+        >
+          Logout
+        </button>
       </div>
+    </div>
 
       {/* Task Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
