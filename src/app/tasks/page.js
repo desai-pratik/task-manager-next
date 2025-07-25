@@ -77,7 +77,7 @@ export default function TaskList() {
               No tasks available 💤
             </h2>
             <p className="text-gray-400">
-              Click "Add Task" to create your first task
+              Click &quot;Add Task&quot; to create your first task
             </p>
           </div>
         )}
